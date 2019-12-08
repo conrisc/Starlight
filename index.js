@@ -16,7 +16,7 @@ function clearCanvas() {
 
 // ***********************
 
-const numberOfPoints = 200;
+const numberOfPoints = 210;
 const points = Array(numberOfPoints);
 
 for (let i = 0; i < points.length; i++) {
@@ -32,7 +32,7 @@ setInterval(() => {
     clearCanvas();
     drawBackground();
     drawForeground();
-}, 10);
+}, 15);
 
 function drawBackground() {
     const grd = ctx.createRadialGradient(WIDTH/2, HEIGHT/2, 100, WIDTH/2, HEIGHT/2, Math.max(WIDTH, HEIGHT)-300);
@@ -77,26 +77,26 @@ function resetPoint(point) {
         case 0:
             point.x = 0;
             point.y = Math.random() * HEIGHT;
-            point.xMove = Math.random() * coefficient;
+            point.xMove = Math.random() * 0.5 * coefficient;
             point.yMove = (Math.random() - 0.5) * coefficient;
             break;
         case 1:
             point.x = WIDTH;
             point.y = Math.random() * HEIGHT;
-            point.xMove = Math.random() * coefficient * -1;
+            point.xMove = Math.random() * -0.5 * coefficient;
             point.yMove = (Math.random() - 0.5) * coefficient;
             break;
         case 2:
             point.x = Math.random() * WIDTH;
             point.y = 0;
             point.xMove = (Math.random() - 0.5) * coefficient;
-            point.yMove = Math.random() * coefficient;
+            point.yMove = Math.random() * 0.5 * coefficient;
             break;
         case 3:
             point.x = Math.random() * WIDTH;
             point.y = HEIGHT;
             point.xMove = (Math.random() - 0.5) * coefficient;
-            point.yMove = Math.random() * coefficient * -1;
+            point.yMove = Math.random() * -0.5 * coefficient;
             break;
     }
 }
