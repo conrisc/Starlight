@@ -1,11 +1,21 @@
-const WIDTH = document.body.clientWidth;//1200;
-const HEIGHT = document.body.clientHeight;//900;
-console.log(WIDTH, HEIGHT);
-
+const animationContainer = document.getElementById('animationContainer');
 const canvas = document.getElementById('starlightCanvas');
-canvas.width = WIDTH;
-canvas.height = HEIGHT;
 const ctx = canvas.getContext("2d");
+
+let WIDTH = 100;
+let HEIGHT = 100;
+setCanvasSize();
+
+window.addEventListener('resize', setCanvasSize);
+
+function setCanvasSize() {
+    WIDTH = animationContainer.clientWidth;
+    HEIGHT = animationContainer.clientHeight;
+    console.log('Resize: ', WIDTH, HEIGHT);
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
+}
+
 ctx.lineWidth = 1;
 ctx.fillStyle = "#ababab";
 const coefficient = 0.3;
@@ -30,7 +40,7 @@ for (let i = 0; i < points.length; i++) {
 
 setInterval(() => {
     clearCanvas();
-    drawBackground();
+    // drawBackground();
     drawForeground();
 }, 15);
 

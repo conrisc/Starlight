@@ -6,17 +6,21 @@
         <style>
             body {
                 margin: 0;
-                height: 100vh;
                 width: 100%;
             }
-            #starlightCanvas {
-                /* border: 1px solid #666; */
+
+            #animationContainer {
+                background-image: radial-gradient(circle, #e9e9e5, #e5ebe3, #dceee7, #d2f0f0, #cef1fd);
+                height: 100vh;
+                width: 100%;
             }
         </style>
     </head>
 
     <body>
-        <canvas id="starlightCanvas"></canvas>
+        <div id="animationContainer">
+            <canvas id="starlightCanvas"></canvas>
+        </div>
         <script src="index.js"></script>
     </body>
 </html>
