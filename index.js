@@ -1,7 +1,10 @@
-const WIDTH = 1200;
-const HEIGHT = 900;
+const WIDTH = document.body.clientWidth;//1200;
+const HEIGHT = document.body.clientHeight;//900;
+console.log(WIDTH, HEIGHT);
 
 const canvas = document.getElementById('starlightCanvas');
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
 const ctx = canvas.getContext("2d");
 ctx.lineWidth = 1;
 ctx.fillStyle = "#ababab";
@@ -13,7 +16,7 @@ function clearCanvas() {
 
 // ***********************
 
-const numberOfPoints = 100;
+const numberOfPoints = 200;
 const points = Array(numberOfPoints);
 
 for (let i = 0; i < points.length; i++) {
@@ -32,7 +35,7 @@ setInterval(() => {
 }, 10);
 
 function drawBackground() {
-    const grd = ctx.createRadialGradient(WIDTH/2, HEIGHT/2, 100, WIDTH/2, HEIGHT/2, WIDTH-300);
+    const grd = ctx.createRadialGradient(WIDTH/2, HEIGHT/2, 100, WIDTH/2, HEIGHT/2, Math.max(WIDTH, HEIGHT)-300);
     grd.addColorStop(0, "#E9E9E5");
     grd.addColorStop(0.25, "#e5ebe3");
     grd.addColorStop(0.5, "#dceee7");
@@ -98,7 +101,7 @@ function resetPoint(point) {
     }
 }
 
-const maxDistance = 160;
+const maxDistance = (WIDTH + HEIGHT) * 0.05;
 
 function drawPaths() {
     for (const point1 of points) {
