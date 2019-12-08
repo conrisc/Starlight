@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 
 let WIDTH = 100;
 let HEIGHT = 100;
+let maxDistance = (WIDTH + HEIGHT) * 0.05;
 setCanvasSize();
 
 window.addEventListener('resize', setCanvasSize);
@@ -14,6 +15,7 @@ function setCanvasSize() {
     console.log('Resize: ', WIDTH, HEIGHT);
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
+    maxDistance = (WIDTH + HEIGHT) * 0.05;
 }
 
 ctx.lineWidth = 1;
@@ -111,7 +113,6 @@ function resetPoint(point) {
     }
 }
 
-const maxDistance = (WIDTH + HEIGHT) * 0.05;
 
 function drawPaths() {
     for (const point1 of points) {
