@@ -6,8 +6,13 @@ let WIDTH = 100;
 let HEIGHT = 100;
 let maxDistance = (WIDTH + HEIGHT) * 0.05;
 setCanvasSize();
+const cursor = {
+    x: 0,
+    y: 0
+}
 
 window.addEventListener('resize', setCanvasSize);
+canvas.addEventListener('mousemove', handleMouseMove);
 
 function setCanvasSize() {
     WIDTH = animationContainer.clientWidth;
@@ -32,19 +37,35 @@ const numberOfPoints = 210;
 const points = Array(numberOfPoints);
 
 for (let i = 0; i < points.length; i++) {
-    points[i] = {
-        x: Math.random() * WIDTH,
-        y: Math.random() * HEIGHT,
-        xMove: (Math.random() - 0.5) * coefficient,
-        yMove: (Math.random() - 0.5) * coefficient
-    }
+    points[i] = {}
+    randomPosition(points[i]);
+}
+
+function randomPosition(point) {
+    point.x = Math.random() * WIDTH;
+    point.y = Math.random() * HEIGHT;
+    point.xMove = (Math.random() - 0.5) * coefficient;
+    point.yMove = (Math.random() - 0.5) * coefficient;
+}
+
+function handleMouseMove(event) {
+    cursor.x = event.layerX;
+    cursor.y = event.layerY;
 }
 
 setInterval(() => {
     clearCanvas();
     // drawBackground();
     drawForeground();
+    // drawCursor();
 }, 15);
+
+function drawCursor() {
+    ctx.beginPath();
+    ctx.arc(cursor.x, cursor.y, 5, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+}
 
 function drawBackground() {
     const grd = ctx.createRadialGradient(WIDTH/2, HEIGHT/2, 100, WIDTH/2, HEIGHT/2, Math.max(WIDTH, HEIGHT)-300);
@@ -76,8 +97,12 @@ function drawPoint(point) {
 }
 
 function movePoint(point) {
+    if (calculateDistance(point, cursor) < maxDistance) {
+        randomPosition(point);
+    }
     if (point.x < 0 || point.y < 0 || point.x > WIDTH || point.y > HEIGHT) {
-        resetPoint(point);
+        // resetPoint(point);
+        randomPosition(point);
     }
     point.x += point.xMove;
     point.y += point.yMove;
